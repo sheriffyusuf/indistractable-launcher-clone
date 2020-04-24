@@ -1,8 +1,7 @@
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:indistractable_clone/screens/blocs/apps/bloc/apps.dart';
-import 'package:indistractable_clone/screens/blocs/apps/bloc/apps_bloc.dart';
+import 'package:indistractable_clone/blocs/apps/bloc/apps.dart';
 
 class AppsScreen extends StatefulWidget {
   @override

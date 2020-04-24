@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:indistractable_clone/routes.dart';
-import 'package:indistractable_clone/screens/blocs/apps/bloc/apps.dart';
+import 'package:indistractable_clone/blocs/apps/bloc/apps.dart';
 import 'package:indistractable_clone/screens/launcher_base_screen.dart';
 import 'package:indistractable_clone/theme/style.dart';
 import 'package:launcher_assist/launcher_assist.dart';

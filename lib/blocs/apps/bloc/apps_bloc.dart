@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:indistractable_clone/screens/blocs/apps/bloc/apps.dart';
+import 'package:indistractable_clone/blocs/apps/bloc/apps.dart';
 
 class AppsBloc extends Bloc<AppsEvent, AppsState> {
   @override
