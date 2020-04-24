@@ -64,6 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Text(
               "Calls",
               style: normalTextStyle,
+              // use this when its time to configure dialer - com.android.dialer
             ),
             SizedBox(
               height: 20,
@@ -78,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Text(
               "Feedback",
               style: normalTextStyle,
+              // use this when its time to configure feedback - com.rlk.feedback
             ),
             Spacer(),
             Row(

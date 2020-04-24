@@ -40,6 +40,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ListTile(
                     title: Text(
                   "Device Settings",
+                  // use this when its time to configure settings - com.android.settings
                   style: _normalTextStyle,
                 )),
                 ListTile(

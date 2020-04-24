@@ -2,14 +2,16 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:indistractable_clone/routes.dart';
+import 'package:indistractable_clone/screens/blocs/apps/bloc/apps.dart';
 import 'package:indistractable_clone/screens/launcher_base_screen.dart';
 import 'package:indistractable_clone/theme/style.dart';
 import 'package:launcher_assist/launcher_assist.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:theme_provider/theme_provider.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(LauncherApp());
 
 class MyApp extends StatefulWidget {
   @override
@@ -252,5 +254,34 @@ class WallpaperContainer extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         child: Image.memory(wallpaper != null ? wallpaper : Uint8List(0),
             fit: BoxFit.cover));
+  }
+}
+
+class LauncherApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ThemeProvider(
+      saveThemesOnChange: true,
+      loadThemeOnInit: true,
+      themes: <AppTheme>[
+        blackAppTheme(),
+        AppTheme.dark(),
+        AppTheme.light(),
+
+        //   customAppTheme(),
+      ],
+      child: BlocProvider<AppsBloc>(
+        create: (context) => AppsBloc()..add(AppsLoadSuccess()),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: "Indistractable",
+          color: Colors.white,
+          home: ThemeConsumer(
+            child: LauncherBaseScreen(),
+          ),
+          routes: routes,
+        ),
+      ),
+    );
   }
 }
