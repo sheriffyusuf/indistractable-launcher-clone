@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:indistractable_clone/blocs/search/bloc/search.dart';
 import 'package:indistractable_clone/routes.dart';
 import 'package:indistractable_clone/blocs/apps/bloc/apps.dart';
 import 'package:indistractable_clone/screens/launcher_base_screen.dart';
@@ -11,7 +13,13 @@ import 'package:launcher_assist/launcher_assist.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:theme_provider/theme_provider.dart';
 
-void main() => runApp(LauncherApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  BlocSupervisor.delegate = SimpleBlocDelegate(
+    await HydratedBlocStorage.getInstance(),
+  );
+  runApp(LauncherApp());
+}
 
 class MyApp extends StatefulWidget {
   @override
@@ -272,16 +280,42 @@ class LauncherApp extends StatelessWidget {
       ],
       child: BlocProvider<AppsBloc>(
         create: (context) => AppsBloc()..add(AppsLoadSuccess()),
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: "Indistractable",
-          color: Colors.white,
-          home: ThemeConsumer(
-            child: LauncherBaseScreen(),
+        child: BlocProvider<SearchBloc>(
+          create: (context) =>
+              SearchBloc(appsBloc: BlocProvider.of<AppsBloc>(context)),
+          child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: "Indistractable",
+            color: Colors.white,
+            home: ThemeConsumer(
+              child: LauncherBaseScreen(),
+            ),
+            routes: routes,
           ),
-          routes: routes,
         ),
       ),
     );
+  }
+}
+
+class SimpleBlocDelegate extends HydratedBlocDelegate {
+  SimpleBlocDelegate(HydratedStorage storage) : super(storage);
+
+  @override
+  void onEvent(Bloc bloc, Object event) {
+    super.onEvent(bloc, event);
+    print(event);
+  }
+
+  @override
+  onTransition(Bloc bloc, Transition transition) {
+    super.onTransition(bloc, transition);
+    print(transition);
+  }
+
+  @override
+  void onError(Bloc bloc, Object error, StackTrace stacktrace) {
+    super.onError(bloc, error, stacktrace);
+    print(error);
   }
 }

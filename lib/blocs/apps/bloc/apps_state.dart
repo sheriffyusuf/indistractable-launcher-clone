@@ -1,5 +1,5 @@
-import 'package:device_apps/device_apps.dart';
 import 'package:equatable/equatable.dart';
+import 'package:indistractable_clone/models/App.dart';
 
 abstract class AppsState extends Equatable {
   const AppsState();
@@ -10,7 +10,7 @@ abstract class AppsState extends Equatable {
 class AppsLoadInProgress extends AppsState {}
 
 class AppsLoaded extends AppsState {
-  final List<Application> apps;
+  final List<App> apps;
 
   const AppsLoaded({this.apps = const []});
 

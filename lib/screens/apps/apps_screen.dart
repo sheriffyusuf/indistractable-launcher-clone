@@ -2,6 +2,7 @@ import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:indistractable_clone/blocs/apps/bloc/apps.dart';
+import 'package:indistractable_clone/blocs/search/bloc/search.dart';
 
 class AppsScreen extends StatefulWidget {
   @override
@@ -15,13 +16,13 @@ class _AppsScreenState extends State<AppsScreen> {
     final _height = MediaQuery.of(context).size.height;
 
     //List names = List.generate(20, (index) => "sheriff $index");
-    return BlocBuilder<AppsBloc, AppsState>(builder: (context, state) {
-      if (state is AppsLoadInProgress) {
+    return BlocBuilder<SearchBloc, SearchState>(builder: (context, state) {
+      if (state is SearchLoading) {
         return Center(
           child: CircularProgressIndicator(),
         );
-      } else if (state is AppsLoaded) {
-        final apps = state.apps;
+      } else if (state is SearchLoaded) {
+        final apps = state.sApps;
         return SafeArea(
           child: Column(
             children: <Widget>[
@@ -31,6 +32,8 @@ class _AppsScreenState extends State<AppsScreen> {
                 color: Colors.black,
                 padding: EdgeInsets.symmetric(horizontal: 12),
                 child: TextField(
+                  onChanged: (value) => BlocProvider.of<SearchBloc>(context)
+                      .add(SearchTextChanged(value)),
                   decoration: InputDecoration(
                       hintText: "Search Apps",
                       hintStyle: TextStyle(color: Colors.white)),
