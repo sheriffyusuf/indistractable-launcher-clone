@@ -24,7 +24,7 @@ dependencies:
   equatable: ^1.1.1
   device_apps: ^1.0.9
   hydrated_bloc: ^3.1.0
-
+  battery: ^1.0.0
 
  # flutter_statusbar_manager: ^1.0.2
 
