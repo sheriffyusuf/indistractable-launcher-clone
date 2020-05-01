@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:indistractable_clone/blocs/battery/bloc/battery_bloc.dart';
 import 'package:indistractable_clone/screens/settings/settings_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -37,10 +39,23 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(height: 12),
                 Row(
                   children: <Widget>[
-                    Icon(
+                    BlocBuilder<BatteryBloc, BatteryState>(
+                        builder: (context, state) {
+                      if (state is Discharging) {
+                        return Container();
+                      } else if (state is Charging) {
+                        return Icon(Icons.add, size: 10);
+                      }
+                      if (state is BatteryInitial) {
+                        return Icon(Icons.apps);
+                      }
+                      return Container();
+                    }),
+
+                    /* Icon(
                       Icons.add,
                       size: 10,
-                    ),
+                    ), */
                     SizedBox(
                       width: 3,
                     ),

@@ -1,9 +1,9 @@
 import 'dart:typed_data';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:indistractable_clone/blocs/battery/bloc/battery_bloc.dart';
 import 'package:indistractable_clone/blocs/search/bloc/search.dart';
 import 'package:indistractable_clone/routes.dart';
 import 'package:indistractable_clone/blocs/apps/bloc/apps.dart';
@@ -278,8 +278,14 @@ class LauncherApp extends StatelessWidget {
 
         //   customAppTheme(),
       ],
-      child: BlocProvider<AppsBloc>(
-        create: (context) => AppsBloc()..add(AppsLoadSuccess()),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider<AppsBloc>(
+              create: (context) => AppsBloc()..add(AppsLoadSuccess())),
+          BlocProvider<BatteryBloc>(
+            create: (context) => BatteryBloc()..add(LoadBattery()),
+          )
+        ],
         child: BlocProvider<SearchBloc>(
           create: (context) =>
               SearchBloc(appsBloc: BlocProvider.of<AppsBloc>(context)),
