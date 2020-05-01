@@ -8,7 +8,6 @@ part 'battery_event.dart';
 part 'battery_state.dart';
 
 class BatteryBloc extends Bloc<BatteryEvent, BatteryState> {
-  bool _broadcastBattery = false;
   StreamSubscription batterySubscription;
   @override
   BatteryState get initialState => BatteryInitial();
@@ -35,20 +34,5 @@ class BatteryBloc extends Bloc<BatteryEvent, BatteryState> {
   Future<void> close() {
     batterySubscription.cancel();
     return super.close();
-  }
-
-  Stream<int> getCurrentBattery() async* {
-    _broadcastBattery = true;
-    while (_broadcastBattery) {
-      var batteryLevel = await B.Battery().batteryLevel;
-      await Future.delayed(Duration(seconds: 5));
-      yield batteryLevel;
-    }
-
-    DateTime currentTime = DateTime.now();
-    while (true) {
-      await Future.delayed(Duration(seconds: 1));
-      yield currentTime;
-    }
   }
 }
