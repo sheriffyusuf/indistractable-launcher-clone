@@ -28,7 +28,7 @@ AppTheme blackAppTheme() {
     description: "White on Black Color Scheme",
     data: ThemeData(
         accentColor: Colors.grey,
-        //     primaryColor: Colors.grey,
+        primaryColor: Colors.black,
         //   canvasColor: Colors.black,
         brightness: Brightness.dark,
         colorScheme: ColorScheme.light(

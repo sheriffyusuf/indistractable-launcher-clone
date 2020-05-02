@@ -29,14 +29,15 @@ class _AppsScreenState extends State<AppsScreen> {
               Container(
                 width: _width,
                 height: _height * 0.10,
-                color: Colors.black,
+                //    color: Colors.black,
                 padding: EdgeInsets.symmetric(horizontal: 12),
                 child: TextField(
                   onChanged: (value) => BlocProvider.of<SearchBloc>(context)
                       .add(SearchTextChanged(value)),
                   decoration: InputDecoration(
-                      hintText: "Search Apps",
-                      hintStyle: TextStyle(color: Colors.white)),
+                    hintText: "Search Apps",
+                    //   hintStyle: TextStyle(color: Colors.white)
+                  ),
                 ),
               ),
               Expanded(

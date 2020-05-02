@@ -274,9 +274,10 @@ class LauncherApp extends StatelessWidget {
       loadThemeOnInit: true,
       themes: <AppTheme>[
         blackAppTheme(),
-        AppTheme.dark(),
-        AppTheme.light(),
-
+        // AppTheme.dark(),
+        AppTheme.light().copyWith(
+            id: "white_theme", data: ThemeData(accentColor: Colors.black)),
+        AppTheme.dark()
         //   customAppTheme(),
       ],
       child: MultiBlocProvider(
