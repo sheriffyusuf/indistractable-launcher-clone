@@ -29,6 +29,7 @@ AppTheme blackAppTheme() {
     data: ThemeData(
         accentColor: Colors.grey,
         primaryColor: Colors.black,
+        dialogBackgroundColor: Color(0xFF111111),
         //   canvasColor: Colors.black,
         brightness: Brightness.dark,
         colorScheme: ColorScheme.light(

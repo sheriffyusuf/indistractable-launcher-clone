@@ -27,7 +27,13 @@ class LauncherApp extends StatelessWidget {
       themes: <AppTheme>[
         blackAppTheme(),
         AppTheme.light().copyWith(
-            id: "white_theme", data: ThemeData(accentColor: Colors.black)),
+            id: "white_theme",
+            data: ThemeData(
+                accentColor: Colors.black,
+                inputDecorationTheme: InputDecorationTheme(
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.black))),
+                dialogBackgroundColor: Color(0xFFdddddd))),
         AppTheme.dark()
       ],
       child: MultiBlocProvider(
