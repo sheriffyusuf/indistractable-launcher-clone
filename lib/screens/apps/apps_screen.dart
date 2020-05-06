@@ -6,6 +6,7 @@ import 'package:indistractable_clone/blocs/search/bloc/search.dart';
 import 'package:indistractable_clone/screens/apps/widgets/dialog_text.dart';
 import 'package:platform/platform.dart';
 import 'package:android_intent/flag.dart';
+import 'package:uninstall_apps/uninstall_apps.dart';
 
 class AppsScreen extends StatefulWidget {
   @override
@@ -98,6 +99,11 @@ class _AppsScreenState extends State<AppsScreen> {
                                       SizedBox(height: 24),
                                       DialogText(
                                         title: "Uninstall",
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          UninstallApps.uninstall(
+                                              app.packageName);
+                                        },
                                       )
                                     ],
                                   ),

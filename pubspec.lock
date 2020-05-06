@@ -406,6 +406,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.6"
+  uninstall_apps:
+    dependency: "direct main"
+    description:
+      name: uninstall_apps
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.4"
   vector_math:
     dependency: transitive
     description:
