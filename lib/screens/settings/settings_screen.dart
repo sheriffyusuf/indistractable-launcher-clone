@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:indistractable_clone/blocs/preferences/bloc/prefs_bloc.dart';
+import 'package:indistractable_clone/screens/settings/widgets/prefs_text_button.dart';
 import 'package:indistractable_clone/screens/settings/widgets/theme_text_button.dart';
-import 'package:theme_provider/theme_provider.dart';
 
 class SettingsScreen extends StatefulWidget {
   static final String id = 'settings_screen';
@@ -10,9 +12,11 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   TextStyle _normalTextStyle = TextStyle(fontSize: 24);
-
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final prefsBloc = BlocProvider.of<PrefsBloc>(context);
+
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -33,51 +37,114 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 trailing: SizedBox(width: 30),
               ),
               Spacer(),
-              Column(
-                children: <Widget>[
-                  ListTile(
-                      title: Text(
-                    "Launcher Preferences",
-                    style: _normalTextStyle,
-                  )),
-                  ExpansionTile(
-                    trailing: SizedBox.shrink(),
-                    title: Text(
-                      "Change Theme",
-                      style: _normalTextStyle,
-                    ),
+              Container(
+                height: height * 0.58,
+                alignment: Alignment.center,
+                child: SingleChildScrollView(
+                  child: Column(
                     children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.only(left: 32.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          // mainAxisSize: MainAxisSize.max,
+                      BlocBuilder<PrefsBloc, PrefsState>(
+                        builder: (context, state) => ExpansionTile(
+                          trailing: SizedBox.shrink(),
+                          title: Text(
+                            "Launcher Preferences",
+                            style: _normalTextStyle,
+                          ),
                           children: <Widget>[
-                            ThemeTextButton(
-                              title: 'Black',
-                              themeId: 'black_theme',
-                            ),
-                            ThemeTextButton(
-                              title: 'White',
-                              themeId: 'white_theme',
-                            )
+                            Padding(
+                                padding: EdgeInsets.only(left: 32),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    PrefsTextButton(
+                                      title: 'Manage Hidden Apps',
+                                    ),
+                                    PrefsTextButton(
+                                      title: 'Manage Favourites',
+                                    ),
+                                    PrefsTextButton(
+                                      title: 'Show App Icons',
+                                    ),
+                                    PrefsTextButton(
+                                      title: 'Show Status Bar',
+                                    ),
+                                    PrefsTextButton(
+                                      title: state.showSearchBar
+                                          ? 'Hide Search Bar'
+                                          : 'Show Search Bar',
+                                      onTap: () {
+                                        prefsBloc.add(
+                                            PrefsEvent.ToggleShowSearchBar);
+                                        print("done changing battery level");
+                                      },
+                                    ),
+                                    PrefsTextButton(
+                                      title: 'Hide Character Scroll',
+                                    ),
+                                    PrefsTextButton(
+                                      title: state.showBattery
+                                          ? 'Hide Battery Level'
+                                          : 'Show Battery Level',
+                                      onTap: () {
+                                        prefsBloc
+                                            .add(PrefsEvent.ToggleShowBattery);
+                                        print("done changing battery level");
+                                      },
+                                    ),
+                                    PrefsTextButton(
+                                      title: 'Change to 24H Time Format',
+                                    ),
+                                    PrefsTextButton(
+                                      title: 'Hide default Tasks',
+                                    ),
+                                    PrefsTextButton(
+                                      title: 'Hide default Calls',
+                                    )
+                                  ],
+                                ))
                           ],
                         ),
-                      )
+                      ),
+                      ExpansionTile(
+                        trailing: SizedBox.shrink(),
+                        title: Text(
+                          "Change Theme",
+                          style: _normalTextStyle,
+                        ),
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.only(left: 32.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              // mainAxisSize: MainAxisSize.max,
+                              children: <Widget>[
+                                ThemeTextButton(
+                                  title: 'Black',
+                                  themeId: 'black_theme',
+                                ),
+                                ThemeTextButton(
+                                  title: 'White',
+                                  themeId: 'white_theme',
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      ListTile(
+                          title: Text(
+                        "Device Settings",
+                        // use this when its time to configure settings - com.android.settings
+                        style: _normalTextStyle,
+                      )),
+                      ListTile(
+                          title: Text(
+                        "Change Default Launcher",
+                        style: _normalTextStyle,
+                      )),
                     ],
                   ),
-                  ListTile(
-                      title: Text(
-                    "Device Settings",
-                    // use this when its time to configure settings - com.android.settings
-                    style: _normalTextStyle,
-                  )),
-                  ListTile(
-                      title: Text(
-                    "Change Default Launcher",
-                    style: _normalTextStyle,
-                  )),
-                ],
+                ),
               ),
               Spacer(),
               ListTile(
@@ -90,5 +157,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

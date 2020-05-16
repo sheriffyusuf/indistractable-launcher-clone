@@ -2,6 +2,7 @@ import 'package:android_intent/android_intent.dart';
 import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:indistractable_clone/blocs/preferences/bloc/prefs_bloc.dart';
 import 'package:indistractable_clone/blocs/search/bloc/search.dart';
 import 'package:indistractable_clone/screens/apps/widgets/dialog_text.dart';
 import 'package:platform/platform.dart';
@@ -33,16 +34,26 @@ class _AppsScreenState extends State<AppsScreen> {
               Container(
                 width: _width,
                 height: _height * 0.10,
+                alignment: Alignment.bottomCenter,
                 //    color: Colors.black,
                 padding: EdgeInsets.symmetric(horizontal: 12),
-                child: TextField(
-                  onChanged: (value) => BlocProvider.of<SearchBloc>(context)
-                      .add(SearchTextChanged(value)),
-                  decoration: InputDecoration(
-                    hintText: "Search Apps",
-                    //   hintStyle: TextStyle(color: Colors.white)
-                  ),
-                ),
+                child: BlocBuilder<PrefsBloc, PrefsState>(
+                    builder: (context, state) {
+                  return state.showSearchBar
+                      ? Padding(
+                          padding: EdgeInsets.only(bottom: 10),
+                          child: TextField(
+                            onChanged: (value) =>
+                                BlocProvider.of<SearchBloc>(context)
+                                    .add(SearchTextChanged(value)),
+                            decoration: InputDecoration(
+                              hintText: "Search Apps",
+                              //   hintStyle: TextStyle(color: Colors.white)
+                            ),
+                          ),
+                        )
+                      : Container();
+                }),
               ),
               Expanded(
                 child: ListView.builder(

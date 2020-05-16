@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:indistractable_clone/blocs/battery/bloc/battery_bloc.dart';
 import 'package:indistractable_clone/blocs/battery_level/bloc/battery_level_bloc.dart';
+import 'package:indistractable_clone/blocs/preferences/bloc/prefs_bloc.dart';
 import 'package:indistractable_clone/blocs/search/bloc/search.dart';
 import 'package:indistractable_clone/routes.dart';
 import 'package:indistractable_clone/blocs/apps/bloc/apps.dart';
@@ -46,6 +47,9 @@ class LauncherApp extends StatelessWidget {
           ),
           BlocProvider<BatteryLevelBloc>(
             create: (context) => BatteryLevelBloc(),
+          ),
+          BlocProvider<PrefsBloc>(
+            create: (context) => PrefsBloc(),
           )
         ],
         child: BlocProvider<SearchBloc>(
