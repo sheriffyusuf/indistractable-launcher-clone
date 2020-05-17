@@ -4,4 +4,4 @@ part of 'prefs_bloc.dart';
   const PrefsEvent();
 } */
 
-enum PrefsEvent { ToggleShowBattery, ToggleShowSearchBar }
+enum PrefsEvent { ToggleShowBattery, ToggleShowSearchBar, ToggleTimeFormat }

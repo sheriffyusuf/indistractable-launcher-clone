@@ -88,11 +88,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       onTap: () {
                                         prefsBloc
                                             .add(PrefsEvent.ToggleShowBattery);
-                                        print("done changing battery level");
                                       },
                                     ),
                                     PrefsTextButton(
-                                      title: 'Change to 24H Time Format',
+                                      title: state.is12hourTime
+                                          ? 'Change to 24H Time Format'
+                                          : 'Change to 12H Time Format',
+                                      onTap: () {
+                                        prefsBloc
+                                            .add(PrefsEvent.ToggleTimeFormat);
+                                      },
                                     ),
                                     PrefsTextButton(
                                       title: 'Hide default Tasks',

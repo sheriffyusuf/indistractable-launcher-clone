@@ -22,6 +22,9 @@ class PrefsBloc extends HydratedBloc<PrefsEvent, PrefsState> {
       case PrefsEvent.ToggleShowSearchBar:
         yield state.copyWith(showSearchBar: !state.showSearchBar);
         break;
+      case PrefsEvent.ToggleTimeFormat:
+        yield state.copyWith(is12hourTime: !state.is12hourTime);
+        break;
     }
   }
 
@@ -33,9 +36,10 @@ class PrefsBloc extends HydratedBloc<PrefsEvent, PrefsState> {
   @override
   PrefsState fromJson(Map<String, dynamic> json) {
     return PrefsState(
-        showBattery: json['showBattery'],
-        showCalls: json['showCalls'],
-        showSearchBar: json['showSearchBar'] ?? true);
+        showBattery: json['showBattery'] ?? true,
+        showCalls: json['showCalls'] ?? true,
+        showSearchBar: json['showSearchBar'] ?? true,
+        is12hourTime: json['is12hourTime'] ?? true);
   }
 
   @override
@@ -43,7 +47,8 @@ class PrefsBloc extends HydratedBloc<PrefsEvent, PrefsState> {
     return {
       'showBattery': state.showBattery,
       'showCalls': state.showCalls,
-      'showSearchBar': state.showSearchBar
+      'showSearchBar': state.showSearchBar,
+      'is12hourTime': state.is12hourTime
     };
   }
 }
