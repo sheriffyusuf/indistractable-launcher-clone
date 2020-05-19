@@ -29,6 +29,12 @@ dependencies:
   jiffy: ^3.0.1
   android_intent: ^0.3.7+1
   uninstall_apps: ^0.0.4
+  simple_status_bar:
+    git:
+      url: https://github.com/sheriffyusuf/simple_status_bar
+
+#  simple_status_bar: ^0.0.4
+
 
  # flutter_statusbar_manager: ^1.0.2
 

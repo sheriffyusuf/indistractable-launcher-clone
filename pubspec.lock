@@ -317,6 +317,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.1.2+4"
+  simple_status_bar:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "055e418fe5ebc7329ac8d21c0d4cff0b50ef1234"
+      url: "https://github.com/sheriffyusuf/simple_status_bar"
+    source: git
+    version: "0.0.4"
   sky_engine:
     dependency: transitive
     description: flutter

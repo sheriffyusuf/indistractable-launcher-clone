@@ -66,7 +66,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                       title: 'Show App Icons',
                                     ),
                                     PrefsTextButton(
-                                      title: 'Show Status Bar',
+                                      title: state.showStatusBar
+                                          ? 'Hide Status Bar'
+                                          : 'Show Status Bar',
+                                      onTap: () async {
+                                        prefsBloc.add(
+                                            PrefsEvent.ToggleShowStatusBar);
+                                      },
                                     ),
                                     PrefsTextButton(
                                       title: state.showSearchBar

@@ -13,7 +13,9 @@ class ThemeTextButton extends StatelessWidget {
     return InkWell(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
-      onTap: () => ThemeProvider.controllerOf(context).setTheme(themeId),
+      onTap: () async {
+        ThemeProvider.controllerOf(context).setTheme(themeId);
+      },
       child: Container(
         width: double.infinity,
         alignment: Alignment.centerLeft,

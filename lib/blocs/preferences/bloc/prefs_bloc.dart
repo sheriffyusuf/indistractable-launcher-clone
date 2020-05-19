@@ -25,6 +25,8 @@ class PrefsBloc extends HydratedBloc<PrefsEvent, PrefsState> {
       case PrefsEvent.ToggleTimeFormat:
         yield state.copyWith(is12hourTime: !state.is12hourTime);
         break;
+      case PrefsEvent.ToggleShowStatusBar:
+        yield state.copyWith(showStatusBar: !state.showStatusBar);
     }
   }
 
@@ -39,7 +41,8 @@ class PrefsBloc extends HydratedBloc<PrefsEvent, PrefsState> {
         showBattery: json['showBattery'] ?? true,
         showCalls: json['showCalls'] ?? true,
         showSearchBar: json['showSearchBar'] ?? true,
-        is12hourTime: json['is12hourTime'] ?? true);
+        is12hourTime: json['is12hourTime'] ?? true,
+        showStatusBar: json['showStatusBar'] ?? true);
   }
 
   @override
@@ -48,7 +51,8 @@ class PrefsBloc extends HydratedBloc<PrefsEvent, PrefsState> {
       'showBattery': state.showBattery,
       'showCalls': state.showCalls,
       'showSearchBar': state.showSearchBar,
-      'is12hourTime': state.is12hourTime
+      'is12hourTime': state.is12hourTime,
+      'showStatusBar': state.showStatusBar
     };
   }
 }
